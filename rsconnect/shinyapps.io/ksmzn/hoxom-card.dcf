@@ -1,0 +1,13 @@
+name: hoxom-card
+title: hoxom-card
+username:
+account: ksmzn
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 243378
+bundleId: 1112213
+url: https://ksmzn.shinyapps.io/hoxom-card/
+when: 1512325593.09421
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: card/card.xcf|card/twitter.xcf
