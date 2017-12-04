@@ -40,10 +40,11 @@ body <- dashboardBody(
                textInput("post", "役職", value = "主任"),
                textInput("tw_account", "Twitterアカウント", value = ""),
                textInput("site_url", "Webサイト", value = ""),
-               textInput("other", "他なんでも", value = ""),
-               textInput("serif", "コメント", value = "進捗どうですか"),
+               textAreaInput("other", "他なんでも", value = ""),
+               textAreaInput("serif", "コメント", value = "進捗どうですか"),
                checkboxGroupInput("effects", "エフェクト",
-                                  choices = list("edge", "charcoal", "negate", "flip", "flop"))
+                                  choices = list("edge", "charcoal", "negate", "flip", "flop")),
+               sliderInput("implode", "Implode", -1, 1, 0, step = 0.01)
            )
     )
   )

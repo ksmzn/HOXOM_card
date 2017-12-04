@@ -3,6 +3,7 @@ library(dplyr)
 library(magick)
 library(glue)
 library(jsonlite)
+library(longurl)
 
 server <- function(input, output, session) {
   
@@ -36,10 +37,13 @@ server <- function(input, output, session) {
   observeEvent(input$insert_by_twitter, {
     payload <- jsonlite::fromJSON(input$insert_by_twitter)
     tmp$icon_path <<- payload$icon_path
+    site_url <- payload$site_url %>% 
+      longurl::expand_urls() %>% 
+      dplyr::pull(expanded_url)
     updateTextInput(session, "username", value = payload$username)
     updateTextInput(session, "tw_account", value = payload$tw_account)
-    updateTextInput(session, "site_url", value = payload$site_url)
-    updateTextInput(session, "serif", value = payload$serif)
+    updateTextInput(session, "site_url", value = site_url)
+    updateTextAreaInput(session, "serif", value = payload$serif)
     updateCheckboxGroupInput(session, "effects", selected = "")
   })
     
@@ -74,6 +78,10 @@ server <- function(input, output, session) {
     
     if("flop" %in% input$effects)
       icon <- image_flop(icon)
+    
+    icon <- icon %>% 
+      image_implode(input$implode)
+      
   
     card <- card %>% 
       image_background(bg_color) %>% # OK
