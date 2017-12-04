@@ -24,7 +24,7 @@ body <- dashboardBody(
                title = "名刺",
                width = NULL, solidHeader = TRUE,
                imageOutput("card", height = 500),
-               textAreaInput("tweet", "ツイートして名刺をシェアしましょう", value = "匿名知的集団ホクソエムに加入しました！", width = "700px",
+               textAreaInput("tweet", "ツイートして名刺をシェアしましょう", value = "匿名知的集団ホクソエムに加入しました！ https://ksmzn.shinyapps.io/hoxom-card/", width = "700px",
                              placeholder = "ツイート内容を記入してください"),
                actionButton("twShare64Btn", "Twitterでシェアする")
            )
@@ -36,8 +36,8 @@ body <- dashboardBody(
                tags$br(),
                fileInput("upload", "アイコン画像をアップロード", accept = c('image/png', 'image/jpeg')),
                colourInput("bg_color", "背景色選択", "orange"),
-               textInput("username", "名前", value = "なまえ"),
                textInput("post", "役職", value = "主任"),
+               textInput("username", "名前", value = "なまえ"),
                textInput("tw_account", "Twitterアカウント", value = ""),
                textInput("site_url", "Webサイト", value = ""),
                textAreaInput("other", "他なんでも", value = ""),

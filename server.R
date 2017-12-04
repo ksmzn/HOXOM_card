@@ -37,9 +37,13 @@ server <- function(input, output, session) {
   observeEvent(input$insert_by_twitter, {
     payload <- jsonlite::fromJSON(input$insert_by_twitter)
     tmp$icon_path <<- payload$icon_path
-    site_url <- payload$site_url %>% 
-      longurl::expand_urls() %>% 
-      dplyr::pull(expanded_url)
+    site_url <- payload$site_url
+    df_expanded_url <- site_url %>% 
+      longurl::expand_urls()
+    if(!is.null(site_url) && df_expanded_url$status_code[[1]]==200L){
+      site_url <- df_expanded_url %>% 
+        dplyr::pull(expanded_url)
+    }
     updateTextInput(session, "username", value = payload$username)
     updateTextInput(session, "tw_account", value = payload$tw_account)
     updateTextInput(session, "site_url", value = site_url)

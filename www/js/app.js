@@ -4,7 +4,7 @@ Shiny.addCustomMessageHandler("tw_consumer_key",
       // twitter access token if the user is logged in and sharing permissions
       var twToken = null;
       var consumer_key = message.key;
-
+    
       return {
         
         init : function() {
@@ -34,7 +34,6 @@ Shiny.addCustomMessageHandler("tw_consumer_key",
         		app.changeText('twLogin', 'Sign in with Twitter');
           });
     
-          
           // register click event on twitter share base64 image button
           $('#twShare64Btn').click(app.twitterShare64Click);
           $('#insert').click(app.insertTwitterData);
@@ -70,7 +69,9 @@ Shiny.addCustomMessageHandler("tw_consumer_key",
         twitterLogin : function() {
           // if the user isn't logged in or doesn't have sharing permissions,
           // prompt for it and then store the access token and attempt to sharethe image
+          console.log("Try Login!");
           hello('twitter').login().then(function(r) {
+            console.log("Success Login!", r);
           	alert('Twitterにログインしました。作った名刺をシェアしてみましょう！');
           }, function(e) {
           	alert('Signin error: ' + e.error.message);
@@ -96,7 +97,8 @@ Shiny.addCustomMessageHandler("tw_consumer_key",
         },
     
         // insert user data of Twitter
-        insertTwitterData : function() {
+        insertTwitterData : function(e) {
+          e.preventDefault();
           // if there is an access token, call the function to share the image
           if (twToken !== null) {
           	hello('twitter').api('me').then(function(r) {
@@ -125,7 +127,7 @@ Shiny.addCustomMessageHandler("tw_consumer_key",
               message : tweet_text,
               file: app.dataURItoBlob(base64img)
           }).then(function(json){
-            console.log(json);
+            console.log('Tweet!');
           }, function(e) {
             console.log(e);
           });
