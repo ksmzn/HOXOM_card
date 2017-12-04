@@ -1,7 +1,7 @@
 Shiny.addCustomMessageHandler("tw_consumer_key",
   function(message) {
     app = function() {
-      // facebook access token if the user is logged in and sharing permissions
+      // twitter access token if the user is logged in and sharing permissions
       var twToken = null;
       var consumer_key = message.key;
 
@@ -10,7 +10,6 @@ Shiny.addCustomMessageHandler("tw_consumer_key",
         init : function() {
           // initialize hellojs
           hello.init({
-          	//twitter: "kfBgv9XxrZNz0xW3DybF68cEk",
           	twitter: consumer_key
           }, {
             // Redirected page 
@@ -36,7 +35,7 @@ Shiny.addCustomMessageHandler("tw_consumer_key",
           });
     
           
-          // register click event on facebook share base64 image button
+          // register click event on twitter share base64 image button
           $('#twShare64Btn').click(app.twitterShare64Click);
           $('#insert').click(app.insertTwitterData);
           $('#twLogin').click(function(){
@@ -117,7 +116,7 @@ Shiny.addCustomMessageHandler("tw_consumer_key",
           }
         },
     
-        // share a base64 encoded image to facebook
+        // share a base64 encoded image to Twitter
         twitterShare64 : function() {
       		var el_card = document.getElementById("card");
           var base64img  = el_card.querySelector("img").getAttribute('src');
